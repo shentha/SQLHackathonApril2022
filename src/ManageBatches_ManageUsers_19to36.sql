@@ -61,6 +61,8 @@ group by ROLE_ID
 
 //-- 26	 - 1) Get users by name
           2) Get users by Program - medium	
+select user_first_name, user_last_name
+from public.tbl_lms_user;
 
 
 
