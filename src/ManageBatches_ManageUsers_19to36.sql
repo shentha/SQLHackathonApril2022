@@ -50,7 +50,7 @@ select * from public.tbl_lms_userrole_map
 where user_role_status = 'Active'
 
 select * from public.tbl_lms_userrole_map
-where user_role_status = 'InActive'"
+where user_role_status = 'InActive'
 
 
 //-- 25	- Get total users by role	
@@ -60,7 +60,7 @@ group by ROLE_ID
 
 
 //-- 26	 - 1) Get users by name
-          2) Get users by Program - medium"	
+          2) Get users by Program - medium	
 
 
 
