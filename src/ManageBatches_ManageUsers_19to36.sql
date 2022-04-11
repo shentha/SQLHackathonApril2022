@@ -13,7 +13,7 @@ from public.tbl_lms_batch bth
   inner join public.tbl_lms_assignments asg
   on bth.batch_id = asg.a_batch_id
 group by bth.batch_id
-order by count(asg.a_id) desc"
+order by count(asg.a_id) desc
 
 
 //-- 22 - 	Get batch with maximum number of users
@@ -113,7 +113,7 @@ where user_role_id = 1
 
 update public.tbl_lms_userrole_map
 set user_role_status = 'Active'
-where user_role_id = 1"
+where user_role_id = 1
 
 
 // -- 30 - Update user information all fields
@@ -129,7 +129,7 @@ user_edu_ug ='Project Management',
 user_edu_pg = 'MBA',
 user_comments = 'Testing',
 user_visa_status = 'US-Citizen'
-where user_id = 'U11'"
+where user_id = 'U11'
 
 
 // -- 31 - Get users by each skill and give a count of users by every skill and find which skill has more number of users
