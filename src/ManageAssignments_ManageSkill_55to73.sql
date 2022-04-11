@@ -114,13 +114,12 @@ UPDATE tbl_lms_submissions
 	Where sub_id='1';
 
 -- 66 -Get grades of students in a batch
+
 SELECT
+	u.user_id AS student_id,
 	b.batch_id AS batch_id,
 	b.batch_name AS batch_name,
 	b.batch_description AS batch_description,
-	--a.a_id AS Assignment_Id,
-	--a.a_name AS Assignment_Name,
-	--s.sub_id AS Submission_Id,
 	u.user_first_name AS submitted_by_first_name,
 	u.user_last_name AS submitted_by_last_name,	
 	s.graded_by AS Graded_By,
@@ -130,6 +129,7 @@ FROM tbl_lms_batch AS b
 	INNER JOIN tbl_lms_submissions AS s ON s.sub_a_id = a.a_id
 	LEFT JOIN tbl_lms_user AS u ON u.user_id = s.sub_student_id
 WHERE batch_id='2';
+
 
 -- 67 -Get all users for a batch and then get the user with the highest grade for a particular assignment
 
