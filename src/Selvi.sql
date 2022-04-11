@@ -74,8 +74,8 @@ CREATE TABLE public.tbl_lms_hackathon (
     hackathon_id integer NOT NULL PRIMARY KEY,
     hackathon_name varchar(20) NOT NULL,
     hackathon_description varchar,
-    start_date date NOT NULL DEFAULT CURRENT_DATE ,
-    end_date date NOT NULL
+    start_time timestamp without time zone DEFAULT now() NOT NULL,
+    end_time timestamp without time zone DEFAULT now() NOT NULL
   );
 commit;
 
@@ -108,3 +108,27 @@ CREATE SEQUENCE public.tbl_lms_user_hackathon_map_user_hackathon_id_seq
     NO MAXVALUE
     CACHE 1;
 ALTER TABLE public.tbl_lms_user_hackathon_map_user_hackathon_id_seq OWNER TO postgres;
+
+/* 80 : Get all class schedules for a Staff*/
+SELECT cs_id, batch_id, class_no, class_date, class_topic, class_staff_id, class_description, class_comments, 
+       class_notes, class_recording_path, creation_time, last_mod_time
+	FROM public.tbl_lms_class_sch 
+	WHERE class_staff_id =  'U03' 
+	/* or */ 
+SELECT cs_id, batch_id, class_no, class_date, class_topic, class_staff_id, class_description, class_comments, 
+       class_notes, class_recording_path, creation_time, last_mod_time
+	FROM public.tbl_lms_class_sch 
+	WHERE class_staff_id = ( SELECT usr.user_id staffid 
+    FROM tbl_lms_user usr
+    WHERE ( LOWER(usr.user_first_name) LIKE LOWER('vijay%')) ) 
+	
+/* 88. "Update Recordings 1) Remove existing recording and update with new one" */	
+CREATE OR REPLACE PROCEDURE update_recordings(recpath varchar, classid bigint)
+LANGUAGE SQL
+BEGIN ATOMIC
+   UPDATE public.tbl_lms_class_sch
+	SET    class_recording_path= recpath , last_mod_time=now()
+	WHERE cs_id = classid ;
+END; 
+
+call update_recordings('C:\seleniumRecordings',5);  
