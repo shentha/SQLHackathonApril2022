@@ -21,6 +21,7 @@ FROM tbl_lms_batch batch
 WHERE batch.batch_program_id = ( SELECT pgm.program_id 
                                  FROM tbl_lms_program pgm
                                  WHERE pgm.program_name LIKE 'SDET' ) 
+ORDER BY batch.batch_id
 /* Or */								 
 CREATE VIEW batches_program_view AS
     SELECT batch.batch_id , batch.batch_name, batch.batch_description, batch.batch_no_of_classes
