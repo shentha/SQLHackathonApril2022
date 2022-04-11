@@ -83,10 +83,54 @@ FROM tbl_lms_batch AS b
 WHERE b.batch_status ='Active'
 
 -- 62 -Get all Submissions by Batches and find highest number of submissions per batch
+SELECT b.batch_id,a.a_id, COUNT(s.sub_id) Allsubmissions 
+	FROM tbl_lms_batch AS b
+	LEFT JOIN tbl_lms_assignments AS a ON b.batch_id = a.a_batch_id
+	LEFT JOIN tbl_lms_submissions AS s ON s.sub_a_id = a.a_id
+	WHERE b.batch_status ='Active'
+	GROUP BY b.batch_id, a.a_id
+	having COUNT(s.sub_id) =	
+(SELECT MAX(submissions)
+	FROM 
+(SELECT b.batch_id,a.a_id, COUNT(s.sub_id) submissions 
+	FROM tbl_lms_batch AS b
+	LEFT JOIN tbl_lms_assignments AS a ON b.batch_id = a.a_batch_id
+	LEFT JOIN tbl_lms_submissions AS s ON s.sub_a_id = a.a_id
+	WHERE b.batch_status ='Active'
+	GROUP BY b.batch_id, a.a_id) AS max_sub)
+
 -- 63 -"Update Submissions 1) Assign new grades for a particular assignment of a particular batch"
+
+	
 -- 64 -Delete Submission
+
+DELETE 
+	FROM tbl_lms_submissions 
+	WHERE sub_id='2';
+
 -- 65 -Update or Assign a new grade for a particular submission
+UPDATE tbl_lms_submissions 
+	SET grade = 255 
+	Where sub_id='1';
+
 -- 66 -Get grades of students in a batch
+SELECT
+	b.batch_id AS batch_id,
+	b.batch_name AS batch_name,
+	b.batch_description AS batch_description,
+	--a.a_id AS Assignment_Id,
+	--a.a_name AS Assignment_Name,
+	--s.sub_id AS Submission_Id,
+	u.user_first_name AS submitted_by_first_name,
+	u.user_last_name AS submitted_by_last_name,	
+	s.graded_by AS Graded_By,
+	s.grade AS Grades		
+FROM tbl_lms_batch AS b	
+	LEFT JOIN tbl_lms_assignments AS a ON b.batch_id = a.a_batch_id
+	INNER JOIN tbl_lms_submissions AS s ON s.sub_a_id = a.a_id
+	LEFT JOIN tbl_lms_user AS u ON u.user_id = s.sub_student_id
+WHERE batch_id='2';
+
 -- 67 -Get all users for a batch and then get the user with the highest grade for a particular assignment
 
 --Manage Skills
