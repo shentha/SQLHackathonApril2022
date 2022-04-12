@@ -1,0 +1,7 @@
+	/*Create a Class Schedule*/
+
+INSERT INTO tbl_lms_class_sch(
+    class_no,batch_id,class_topic,class_description,class_comments,class_notes,
+class_recording_path)
+    VALUES (002,2, 'Boot Strap','saasnaam class','take this seriously','
+see you','C:\Users\sasmi\Downloads\Sas_Querires');

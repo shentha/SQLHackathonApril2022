@@ -1,0 +1,5 @@
+	/*Get Class Schedules for a single batch*/
+SELECT COUNT(*) AS classSchedules,tbl_lms_batch.batch_description
+FROM tbl_lms_class_sch 
+JOIN tbl_lms_batch ON tbl_lms_class_sch.batch_id = tbl_lms_batch.batch_id
+GROUP BY tbl_lms_batch.batch_description;

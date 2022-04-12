@@ -1,0 +1,14 @@
+	/*create 5 more class schedules*/
+	SELECT * FROM tbl_lms_class_sch;
+	SELECT * FROM tbl_lms_batch;
+	SELECT * FROM tbl_lms_user;
+	SELECT * FROM tbl_lms_attendance;
+	
+	create procedure Insertmultiplerows(b_id int,c_no int,c_date date,c_topic varchar,c_staffid varchar,c_desc varchar,c_comments varchar,c_notes varchar,c_recording varchar)
+	language sql
+ as $$
+     Insert into tbl_lms_class_sch (batch_id,class_no,class_date,class_topic,class_staff_id,class_description,class_comments,class_notes,class_recording_path) 
+	 values (b_id,c_no,c_date,c_topic,c_staffid,c_desc,c_comments,c_notes,c_recording);
+	 $$
+	 
+	 call Insertmultiplerows(5,3,'2022-04-12','Rest Assured','U05','Rest Assured class','excellent','C:\myRecords', 'C:\Recordings');

@@ -1,0 +1,9 @@
+/*Get number of students who were present for each class by batch*/
+SELECT * FROM tbl_lms_batch;/*batch_id 1 is SDET BATCH 01*/
+SELECT * FROM tbl_lms_attendance;/*student_id U04 is present whose cs_id is 1*/
+SELECT * FROM tbl_lms_class_sch;/*cs_id 1 has also batch_id 1*/
+SELECT Count(tbl_lms_attendance.student_id) AS NoOfStudents
+FROM tbl_lms_class_sch
+JOIN tbl_lms_attendance ON tbl_lms_class_sch.cs_id = tbl_lms_attendance.cs_id
+JOIN tbl_lms_batch ON tbl_lms_class_sch.batch_id = tbl_lms_batch.batch_id
+GROUP BY tbl_lms_class_sch.attendance HAVING tbl_lms_class_sch.attendance='Present';

@@ -1,0 +1,3 @@
+/*Delete Class Schedules for an existing batch*/
+
+ delete from public.tbl_lms_class_sch where batch_id = 2;
