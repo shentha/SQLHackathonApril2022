@@ -21,12 +21,7 @@ QUERY 4:
 
 Get list of programs with program_name starts with S
 
-
 select * from tbl_lms_program where program_name LIKE 'S%';
-
-
-
-
 
 
 QUERY 5:
@@ -36,7 +31,6 @@ Update program by program name
 update  tbl_lms_program
         set program_name='sdet9',program_status='inactive'
         where program_id=1;
-
 
 
 Now check the program name is updated  or not
@@ -59,8 +53,6 @@ select * from tbl_lms_program;
 
 
 
-
-
 QUERY 7:
 Delete program whose id is given. 
 Before deleting first create a new program for the test
@@ -69,22 +61,16 @@ insert into tbl_lms_program (program_id, program_name, program_description, prog
  values (20, 'delete', 'test_del', 'active');
 
 
-
 Checking is it added or not
 select * from tbl_lms_program;
 
 
-
- Now Delete the program whose id is given. 
-
-
+Now Delete the program whose id is given. 
 delete from tbl_lms_program where program_id=20;
 
 
 check that program is deleted or not
-
 select * from tbl_lms_program;
-
 
 
 
@@ -105,14 +91,10 @@ group by a.program_id)as batchcount);
 
 
 
-
-
-
 QUERY 11:
 Create batch
 INSERT INTO tbl_lms_batch(batch_id,batch_name,batch_description,batch_status,batch_program_id,
     batch_no_of_classes) VALUES (9,4,'SDET BATCH47','Active',2,7);
-
 
 
 Checking is it added or not
@@ -121,8 +103,6 @@ select * from tbl_lms_batch;
 
 
 QUERY 12:
-
-
 Get list of batches
 
 select * from tbl_lms_batch;
@@ -138,8 +118,6 @@ select batch_name,program_name from tbl_lms_batch,tbl_lms_program
  where
  tbl_lms_batch.batch_program_id=tbl_lms_program.program_id 
 ORDER BY  program_name, batch_name;
-
-
 
 
 
@@ -175,10 +153,8 @@ update batch description
 update tbl_lms_batch set batch_description = 'SDET' WHERE batch_id=1;
 
 
-
 Check its updated or not
 select * from tbl_lms_batch;
-
 
 
 QUERY 18:
