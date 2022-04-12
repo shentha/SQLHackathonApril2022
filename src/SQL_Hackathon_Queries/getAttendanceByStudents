@@ -1,0 +1,5 @@
+/*Get Attendance by Students for a single class schedule*/
+
+SELECT tbl_lms_attendance.student_id,tbl_lms_class_sch.attendance
+FROM tbl_lms_class_sch
+JOIN tbl_lms_attendance ON tbl_lms_class_sch.cs_id = tbl_lms_attendance.cs_id;

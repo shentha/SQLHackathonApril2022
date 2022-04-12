@@ -1,0 +1,6 @@
+/*Delete Attendance for a all Class Schedules of a particular batch*/
+
+DELETE FROM tbl_lms_attendance WHERE cs_id IN
+(SELECT tbl_lms_attendance.cs_id FROM tbl_lms_attendance
+INNER JOIN tbl_lms_class_sch ON tbl_lms_attendance.cs_id = tbl_lms_class_sch.cs_id
+WHERE tbl_lms_class_sch.batch_id=1);

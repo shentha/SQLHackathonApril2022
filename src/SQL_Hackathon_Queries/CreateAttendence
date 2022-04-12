@@ -1,0 +1,3 @@
+/*Create Attendance for a class schedule*/
+ALTER TABLE tbl_lms_class_sch
+  ADD Attendance VARCHAR(50);
