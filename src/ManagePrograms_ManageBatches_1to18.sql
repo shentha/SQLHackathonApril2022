@@ -4,14 +4,8 @@ QUERY 2:
 select * from tbl_lms_program;
 
 
-
-
-
 QUERY 3:
 Get the list of programs by id  and name
-
-
-
 
 select program_id, program_name from tbl_lms_program;
 
@@ -144,9 +138,7 @@ QUERY 15:
 
 Get batch by name
 
-select batch_name from tbl_lms_batch;
-
-
+select * from tbl_lms_batch where batch_name='05';
 
 QUERY 16:
 
