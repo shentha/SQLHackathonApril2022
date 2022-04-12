@@ -4,9 +4,6 @@ QUERY 2:
 select * from tbl_lms_program;
 
 
-
-
-
 QUERY 3:
 Get the list of programs by id  and name
 
