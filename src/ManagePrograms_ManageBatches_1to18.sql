@@ -146,8 +146,6 @@ Get batch by name
 
 select * from tbl_lms_batch where batch_name='05';
 
-
-
 QUERY 16:
 
 Update batch by name
