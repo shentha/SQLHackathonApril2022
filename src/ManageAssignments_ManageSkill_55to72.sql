@@ -32,7 +32,7 @@ WHERE b.batch_id='2'
 GROUP BY b.batch_id, u.user_id 
 
 
---57 Delete Assignment
+--57 -Delete Assignment
 
 DELETE FROM tbl_lms_assignments WHERE a_id='1';
 
