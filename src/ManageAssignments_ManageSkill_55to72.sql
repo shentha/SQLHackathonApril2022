@@ -36,12 +36,14 @@ GROUP BY b.batch_id, u.user_id
 
 DELETE FROM tbl_lms_assignments WHERE a_id='1';
 
+
 --58 -Create new Submission for an new assignment
 
 INSERT INTO tbl_lms_submissions(
 sub_id, sub_a_id, sub_student_id, sub_description, sub_comments, sub_path_attach1,
 sub_path_attach2, sub_path_attach3, sub_path_attach4, sub_path_attach5, sub_datetime, graded_by, graded_datetime, grade, creation_time, last_mod_time)
 VALUES (5, 1,'U03', 'Submissions for Oracle assignment', 'submitted','Filepath1', 'Filepath2', 'Filepath3', 'Filepath4', 'Filepath5',NOW(), 'U03', NOW(), 297, NOW(), NOW());
+
 
 -- 59 - Get Submissions for an existing assignment
 
@@ -93,6 +95,7 @@ FROM tbl_lms_user AS u
 	LEFT JOIN tbl_lms_assignments AS a ON s.sub_a_id = a.a_id -- Left joined to include all users irrespective of, whether they have submitted or not
 WHERE r.role_name = 'User'
 
+
 -- 61 -Get all Submissions by Batches
 
 SELECT
@@ -121,6 +124,7 @@ FROM tbl_lms_batch AS b
 	LEFT JOIN tbl_lms_user AS u ON u.user_id = s.sub_student_id
 WHERE b.batch_status ='Active'
 
+
 -- 62 -Get all Submissions by Batches and find highest number of submissions per batch
 
 SELECT b.batch_id,a.a_id, COUNT(s.sub_id) Allsubmissions 
@@ -139,6 +143,7 @@ SELECT b.batch_id,a.a_id, COUNT(s.sub_id) Allsubmissions
 	WHERE b.batch_status ='Active'
 	GROUP BY b.batch_id, a.a_id) AS max_sub)
 
+
 -- 63 -"Update Submissions 1) Assign new grades for a particular assignment of a particular batch"
 
 WITH rslt AS 
@@ -149,12 +154,14 @@ UPDATE tbl_lms_submissions
 SET grade = 278
 FROM rslt 
 Where rslt.batch_id='1' AND rslt.asignment_id='1' AND  sub_a_id = rslt.asignment_id;
+
 	
 -- 64 -Delete Submission
 
 DELETE 
 	FROM tbl_lms_submissions 
 	WHERE sub_id='2';
+
 
 -- 65 -Update or Assign a new grade for a particular submission
 
@@ -167,6 +174,7 @@ UPDATE tbl_lms_submissions
 SET grade = 253
 FROM rslt 
 Where sub_id='1' AND rslt.asignment_id='1' AND rslt.batch_id='1';
+
 
 -- 66 -Get grades of students in a batch
 
@@ -208,6 +216,7 @@ HAVING MAX(s.grade) IN
 		INNER JOIN tbl_lms_submissions AS s ON s.sub_a_id = a.a_id
 	WHERE b.batch_id='1'
 	GROUP BY b.batch_id, a.a_id)
+
 	
 --Manage Skills
 
@@ -217,15 +226,18 @@ INSERT INTO tbl_lms_skill_master(
 	skill_id, skill_name, creation_time, last_mod_time)
 	VALUES ('7','Gherkins','2022-10-04','2021-10-04');
 
+
 -- 69 -Get all Skills by Name	
 
 SELECT skill_id,skill_name from tbl_lms_skill_master; 
+
 
 -- 70 -Get a particular skill and update experience
 
 Update tbl_lms_skill_master 
 	SET skill_name='Gherkin'
 	WHERE skill_id= '7';
+
 	
 -- 71 -Get skills by all users and display the user with high number of skills
 
