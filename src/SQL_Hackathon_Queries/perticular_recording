@@ -1,0 +1,6 @@
+/*Get Recordings for a particular class schedue*/
+
+
+SELECT class_recording_path 
+FROM tbl_lms_class_sch
+WHERE cs_id = 3;

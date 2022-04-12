@@ -1,0 +1,7 @@
+	/*"Update Class Schedules
+1) Change date
+2) Change staff"*/
+
+ UPDATE tbl_lms_class_sch
+
+SET class_date = '20222-04-10',class_staff_id='U05' WHERE cs_id = 12 ;

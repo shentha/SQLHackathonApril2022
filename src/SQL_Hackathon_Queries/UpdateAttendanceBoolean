@@ -1,0 +1,7 @@
+/*Update Attendance 1) Mark Attendance as Present or Absent*/
+SELECT * FROM tbl_lms_batch;
+SELECT * FROM tbl_lms_attendance;
+SELECT * FROM tbl_lms_class_sch;
+UPDATE tbl_lms_class_sch
+SET attendance = 'Present' WHERE class_staff_id ='U02'; 
+

@@ -1,0 +1,8 @@
+/*Get All Recordings for a existiing batch*/
+
+
+SELECT tbl_lms_batch.batch_id,tbl_lms_batch.batch_description,
+tbl_lms_class_sch.class_recording_path 
+FROM tbl_lms_class_sch
+INNER JOIN tbl_lms_batch 
+ON tbl_lms_class_sch.batch_id = tbl_lms_batch.batch_id;

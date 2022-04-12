@@ -1,0 +1,7 @@
+/*Count number of users based on skill*/
+SELECT tbl_lms_skill_master.skill_name,count(tbl_lms_user.user_id) AS NoOfUsers from tbl_lms_user
+INNER JOIN 
+	tbl_lms_userskill_map ON tbl_lms_user.user_id = tbl_lms_userskill_map.user_id
+INNER JOIN
+	tbl_lms_skill_master ON tbl_lms_userskill_map.skill_id = tbl_lms_skill_master.skill_id
+	group by tbl_lms_skill_master.skill_name;

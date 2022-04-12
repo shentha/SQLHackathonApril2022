@@ -1,0 +1,11 @@
+	/*Create 5 more Class Schedules*/
+
+   
+INSERT INTO tbl_lms_class_sch
+(class_no,batch_id,class_topic,class_description,class_staff_id,class_comments,class_notes,class_recording_path)
+    VALUES 
+         (002,2, 'Boot Strap','Saasnaam class','U03','take this seriously','see you','C:\Users\saami\Downloads\my_Querires'),
+         (002,1, 'JavaScript','Saasnaam class','U03','take this seriously','see you','C:\Users\saami\Downloads\my_Querires'),
+         (003,3, 'ANgularJs','Saasnaam class','U03','take this seriously','see you','C:\Users\saami\Downloads\my_Querires'),
+         (002,2, 'MicroServices','Saasnaam class','U03','take this seriously','see you','C:\Users\saami\Downloads\my_Querires'),
+         (002,3, 'React JS','Saasnaam class','U03','take this seriously','see you','C:\Users\saami\Downloads\my_Querires');
