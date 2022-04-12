@@ -1,18 +1,15 @@
 /* 9. Get the program with maximum number of users */
-WITH rslt1 AS 
-  ( SELECT  pgm.program_name pgmname, 
+    SELECT  pgm.program_name pgmname, 
             COUNT(pgm.program_name) usrcount 
     FROM tbl_lms_program pgm 
     JOIN tbl_lms_batch batch ON pgm.program_id = batch.batch_program_id 
     JOIN tbl_lms_userbatch_map ubm  ON batch.batch_id = ubm.batch_id 
 	JOIN tbl_lms_userrole_map urm ON ubm.user_role_id = urm.user_role_id
 	JOIN tbl_lms_role rle ON urm.role_id = rle.role_id
-	WHERE rle.role_name = 'Student'
+	WHERE rle.role_name = 'Student' OR rle.role_name LIKE 'User'
 	GROUP BY pgm.program_name 
-  ) 
-	
-SELECT rslt1.pgmname, rslt1.usrcount FROM rslt1 
-WHERE rslt1.usrcount = ( SELECT MAX ( rslt1.usrcount) FROM rslt1 )
+	ORDER BY COUNT(pgm.program_name) DESC
+	LIMIT 1
 	
 	
 /* 10. Get all batches for particular program */
