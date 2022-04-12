@@ -7,9 +7,6 @@ select * from tbl_lms_program;
 QUERY 3:
 Get the list of programs by id  and name
 
-
-
-
 select program_id, program_name from tbl_lms_program;
 
 
