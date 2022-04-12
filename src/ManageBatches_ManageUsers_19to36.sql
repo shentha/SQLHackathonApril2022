@@ -17,11 +17,12 @@ order by count(asg.a_id) desc
 
 
 //-- 22 - 	Get batch with maximum number of users
-select batch_id  
+select batch_id , count(batch_id) 
 from public.tbl_lms_userbatch_map
 group by batch_id
 order by count(batch_id) desc 
 LIMIT 1
+
 
 
 //-- 23 - 	Create new user with role
