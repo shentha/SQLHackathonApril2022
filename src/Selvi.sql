@@ -1,18 +1,15 @@
 /* 9. Get the program with maximum number of users */
-WITH rslt1 AS 
-  ( SELECT  pgm.program_name pgmname, 
+    SELECT  pgm.program_name pgmname, 
             COUNT(pgm.program_name) usrcount 
     FROM tbl_lms_program pgm 
     JOIN tbl_lms_batch batch ON pgm.program_id = batch.batch_program_id 
     JOIN tbl_lms_userbatch_map ubm  ON batch.batch_id = ubm.batch_id 
 	JOIN tbl_lms_userrole_map urm ON ubm.user_role_id = urm.user_role_id
 	JOIN tbl_lms_role rle ON urm.role_id = rle.role_id
-	WHERE rle.role_name = 'Student'
+	WHERE rle.role_name = 'Student' OR rle.role_name LIKE 'User'
 	GROUP BY pgm.program_name 
-  ) 
-	
-SELECT rslt1.pgmname, rslt1.usrcount FROM rslt1 
-WHERE rslt1.usrcount = ( SELECT MAX ( rslt1.usrcount) FROM rslt1 )
+	ORDER BY COUNT(pgm.program_name) DESC
+	LIMIT 1
 	
 	
 /* 10. Get all batches for particular program */
@@ -21,6 +18,7 @@ FROM tbl_lms_batch batch
 WHERE batch.batch_program_id = ( SELECT pgm.program_id 
                                  FROM tbl_lms_program pgm
                                  WHERE pgm.program_name LIKE 'SDET' ) 
+ORDER BY batch.batch_id
 /* Or */								 
 CREATE VIEW batches_program_view AS
     SELECT batch.batch_id , batch.batch_name, batch.batch_description, batch.batch_no_of_classes
@@ -74,8 +72,8 @@ CREATE TABLE public.tbl_lms_hackathon (
     hackathon_id integer NOT NULL PRIMARY KEY,
     hackathon_name varchar(20) NOT NULL,
     hackathon_description varchar,
-    start_date date NOT NULL DEFAULT CURRENT_DATE ,
-    end_date date NOT NULL
+    start_time timestamp without time zone DEFAULT now() NOT NULL,
+    end_time timestamp without time zone DEFAULT now() NOT NULL
   );
 commit;
 
@@ -108,3 +106,27 @@ CREATE SEQUENCE public.tbl_lms_user_hackathon_map_user_hackathon_id_seq
     NO MAXVALUE
     CACHE 1;
 ALTER TABLE public.tbl_lms_user_hackathon_map_user_hackathon_id_seq OWNER TO postgres;
+
+/* 80 : Get all class schedules for a Staff*/
+SELECT cs_id, batch_id, class_no, class_date, class_topic, class_staff_id, class_description, class_comments, 
+       class_notes, class_recording_path, creation_time, last_mod_time
+	FROM public.tbl_lms_class_sch 
+	WHERE class_staff_id =  'U03' 
+	/* or */ 
+SELECT cs_id, batch_id, class_no, class_date, class_topic, class_staff_id, class_description, class_comments, 
+       class_notes, class_recording_path, creation_time, last_mod_time
+	FROM public.tbl_lms_class_sch 
+	WHERE class_staff_id = ( SELECT usr.user_id staffid 
+    FROM tbl_lms_user usr
+    WHERE ( LOWER(usr.user_first_name) LIKE LOWER('vijay%')) ) 
+	
+/* 88. "Update Recordings 1) Remove existing recording and update with new one" */	
+CREATE OR REPLACE PROCEDURE update_recordings(recpath varchar, classid bigint)
+LANGUAGE SQL
+BEGIN ATOMIC
+   UPDATE public.tbl_lms_class_sch
+	SET    class_recording_path= recpath , last_mod_time=now()
+	WHERE cs_id = classid ;
+END; 
+
+call update_recordings('C:\seleniumRecordings',5);  
