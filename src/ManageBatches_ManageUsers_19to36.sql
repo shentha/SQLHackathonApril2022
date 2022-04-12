@@ -60,10 +60,18 @@ group by ROLE_ID
 
 
 //-- 26	 - 1) Get users by name
-          2) Get users by Program - medium	
-select user_first_name, user_last_name
-from public.tbl_lms_user;
-
+select user_first_name,user_last_name from public.tbl_lms_user
+WHERE ( LOWER(tbl_lms_user.user_first_name) LIKE LOWER('Robert%')
+          OR LOWER(tbl_lms_user.user_last_name) LIKE LOWER('Louis%') )
+	  
+          2) Select p.program_id, b.batch_id, u.user_first_name,u.user_last_name
+FROM tbl_lms_program AS p
+	INNER JOIN tbl_lms_batch AS b ON b.batch_program_id = p.program_id
+	INNER JOIN tbl_lms_userbatch_map AS ub ON ub.batch_id = b.batch_id
+	INNER JOIN tbl_lms_userrole_map AS ur ON ur.user_role_id = ub.user_role_id
+	INNER JOIN tbl_lms_user AS u ON u.user_id = ur.user_id
+WHERE ur.role_id = 'R03'
+AND p.program_id = '1'
 
 
 
