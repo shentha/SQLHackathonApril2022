@@ -145,6 +145,7 @@ SELECT b.batch_id,a.a_id, COUNT(s.sub_id) Allsubmissions
 
 
 -- 63 -"Update Submissions 1) Assign new grades for a particular assignment of a particular batch"
+Note:Submission Table does not have Primary Key.
 
 WITH rslt AS 
 	(SELECT a.a_id as asignment_id, b.batch_id as batch_id	
@@ -164,6 +165,7 @@ DELETE
 
 
 -- 65 -Update or Assign a new grade for a particular submission
+Note:Submission Table does not have Primary Key.
 
 WITH rslt AS 
 	(SELECT a.a_id as asignment_id, b.batch_id as batch_id
