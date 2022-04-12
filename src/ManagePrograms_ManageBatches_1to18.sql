@@ -144,7 +144,7 @@ QUERY 15:
 
 Get batch by name
 
-select batch_name from tbl_lms_batch;
+select * from tbl_lms_batch where batch_name='05';
 
 
 
